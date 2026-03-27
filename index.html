@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<script>(function(){var t=localStorage.getItem('hq_theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}());</script>
 </head>
 <body>
 <div class="hdr">
@@ -15,7 +16,7 @@
     <div class="hdr-title">⚔ HeroQuest: The Shattered Crown</div>
     <div class="hdr-sub">Complete DM Console · All 5 Acts · Side Quests · Rest Scene Manager</div>
   </div>
-  <div style="display:flex;align-items:stretch;gap:.6rem;flex-wrap:wrap">
+  <div class="hdr-right">
     <button class="mode-btn rest" id="modeBtn" title="Switch between Rest Scene and Combat">
       <span id="modeIcon">🏠</span><span id="modeLbl">Rest Scene</span>
     </button>
@@ -35,6 +36,7 @@
       </div>
     </div>
     <div class="hdr-actions">
+      <button class="btn btn-gold btn-sm" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle light/dark theme">☀</button>
       <button class="btn btn-teal btn-sm" onclick="openCampaignModal()" id="campaign-id-display" style="font-family:Cinzel,serif;font-size:.58rem;letter-spacing:.1em;" title="Click to save or load campaign">🏰 Campaign</button>
       <button class="btn btn-gold btn-sm" id="editBtn" onclick="toggleEdit()">✏ Edit Story Text</button>
       <button class="btn btn-teal btn-sm" onclick="dlHTML()">↓ Download HTML</button>
@@ -73,7 +75,7 @@
 <div class="section active" id="tab-home">
 
   <!-- Top row: Gold + Hero cards -->
-  <div style="display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:start;margin-bottom:1.1rem;">
+  <div class="home-top">
 
     <!-- Party Gold (big) -->
     <div style="background:linear-gradient(135deg,rgba(184,134,11,.22),rgba(184,134,11,.06));border:2px solid var(--gold);border-radius:4px;padding:1.4rem 2.2rem;text-align:center;min-width:160px;">
@@ -86,7 +88,7 @@
     <!-- Active hero cards -->
     <div>
       <div style="font-family:Cinzel,serif;font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.6rem;">Active Heroes</div>
-      <div id="home-hero-cards" style="display:flex;flex-wrap:wrap;gap:.65rem;"></div>
+      <div id="home-hero-cards" class="home-heroes"></div>
     </div>
   </div>
 
@@ -405,11 +407,27 @@ Edit this text to keep a running story recap for the table.</div>
 window.__SS__ = {"heroes":[{"id":"dwarf","name":"Brondak Ironhelm","cls":"Dwarf","player":"Chris","portrait":"⛏","atk":5,"def":4,"bodyMax":8,"body":8,"mind":3,"mindMax":3,"baseAtk":2,"baseDef":3,"baseBody":7,"baseMind":3,"gold":20,"equipment":["Handaxe","Shield","Sprit Blade","Chain mail","Staff"],"skills":[],"level":1,"xp":0,"jailed":false,"active":true,"who":"Tavern · Throne · Training Hall · Steel & Stone · Shoot & Score · Superfly Active"},{"id":"elf","name":"Lysara Dawnwhisper","cls":"Elf","player":"Chloe","portrait":"🧝","atk":5,"def":4,"bodyMax":7,"body":7,"mind":4,"mindMax":5,"baseAtk":2,"baseDef":2,"baseBody":6,"baseMind":4,"gold":35,"equipment":["Shortsword","Fortunesword","Helmet","Cloak"],"skills":["Ring of fortitude","Lock doors once per quest","Roots appear on floor"],"level":2,"xp":0,"jailed":false,"active":true,"who":"Tavern · Throne · Superfly Active · Cloaks of Shame · Shoot & Score"},{"id":"wizard","name":"Seraphel the Grey","cls":"Wizard","player":"Taylor","portrait":"🧙","atk":1,"def":2,"bodyMax":4,"body":4,"mind":6,"mindMax":6,"baseAtk":1,"baseDef":2,"baseBody":4,"baseMind":6,"gold":0,"equipment":[],"skills":[],"level":1,"xp":0,"jailed":false,"active":false,"who":"Tavern · Throne · Wizard's Den · Superfly Active · Ferb's Herbs"},{"id":"druid","name":"Elowen Ashgrove","cls":"Druid","player":"Tyler","portrait":"🌿","atk":1,"def":4,"bodyMax":6,"body":6,"mind":5,"mindMax":4,"baseAtk":2,"baseDef":2,"baseBody":6,"baseMind":5,"gold":0,"equipment":[],"skills":["Ball of flame","Boring armor"],"level":1,"xp":3,"jailed":false,"active":true,"who":"Tavern · Throne · Training Hall · Ferb's Herbs · Superfly Active · Cloaks of Shame"},{"id":"barb","name":"Ragnar Ashblade","cls":"Barbarian","player":"Tyler","portrait":"🪓","atk":3,"def":4,"bodyMax":8,"body":8,"mind":2,"mindMax":2,"baseAtk":3,"baseDef":2,"baseBody":8,"baseMind":2,"gold":0,"equipment":["Boring Armour"],"skills":[],"level":1,"xp":0,"jailed":false,"active":false,"who":"Tavern · Throne · Training Hall · Steel & Stone · Shoot & Score"}],"groupGold":0,"turns":{"dwarf":[false,false,false,false,false,false,false,false,false,false],"elf":[false,false,false,false,false,false,false,false,false,false],"wizard":[false,false,false,false,false,false,false,false,false,false],"druid":[false,false,false,false,false,false,false,false,false,false],"barb":[false,false,false,false,false,false,false,false,false,false]},"outposts":[false,false,false,false],"encLog":[],"checklist":{},"sqStatus":{"sq-elf":"done"},"mercStats":{},"enemyStats":{},"shopData":{"shoot":{"crossbow":{"price":0,"stock":null,"stockLeft":null},"ring-fortitude":{"price":0,"stock":null,"stockLeft":null},"wizards-staff":{"price":0,"stock":null,"stockLeft":null},"tool-kit":{"price":0,"stock":null,"stockLeft":null},"throwing-dagger":{"price":0,"stock":null,"stockLeft":null}},"superfly":{"helmet":{"price":0,"stock":3,"stockLeft":3},"shield":{"price":0,"stock":3,"stockLeft":3},"bracers":{"price":0,"stock":null,"stockLeft":null}},"steel":{"handaxe":{"price":0,"stock":null,"stockLeft":null},"plate-mail":{"price":0,"stock":null,"stockLeft":null},"shortsword":{"price":0,"stock":null,"stockLeft":null},"battleaxe":{"price":0,"stock":2,"stockLeft":2},"broadsword":{"price":0,"stock":null,"stockLeft":null},"longsword":{"price":0,"stock":2,"stockLeft":2},"chain-mail":{"price":0,"stock":null,"stockLeft":null}},"ferbs":{"venom-antidote":{"price":0,"stock":null,"stockLeft":null},"potion-restoration":{"price":0,"stock":null,"stockLeft":null},"potion-dexterity":{"price":0,"stock":null,"stockLeft":null},"potion-battle":{"price":0,"stock":null,"stockLeft":null},"potion-speed":{"price":0,"stock":null,"stockLeft":null},"holy-water":{"price":0,"stock":null,"stockLeft":null}}},"itemData":{"ashenwarden-cloak":{"obtained":false,"ownedBy":null},"hearthcleaver":{"obtained":false,"ownedBy":null},"ironclad-codex":{"obtained":false,"ownedBy":null},"iron-wolf":{"obtained":false,"ownedBy":null},"genie-cascade":{"obtained":false,"ownedBy":null},"fortunesword":{"obtained":false,"ownedBy":null},"sprit-blade":{"obtained":false,"ownedBy":null},"olden-pistol":{"obtained":false,"ownedBy":null},"boring-armour":{"obtained":false,"ownedBy":null},"cloak":{"obtained":false,"ownedBy":null}},"dungeonMaps":{"q-scratch":{"name":"Scratch Map","cells":{}},"q1":{"name":"Quest 1 — Temple of Dragliton","cells":{}},"q2":{"name":"Quest 2 — Siege of the West Gate","cells":{}},"q3":{"name":"Quest 3 — Sunken Crypts","cells":{}},"q4":{"name":"Quest 4 — Iron Fortress","cells":{}},"q5":{"name":"Quest 5 — Plagued Marshes","cells":{}},"q6":{"name":"Quest 6 — Drevak's Watchtower","cells":{}},"q7":{"name":"Quest 7 — Citadel of Cassel Mourne","cells":{}}},"dmBaseMap":null,"notes":"Backstab: if an enemy I sent in combat, you can stealth hit them and then move away with a 2d6\n\nEntangle: If an enemy is in combat you can spell entangle once per turn and stop them from moving. \n\nDruid: starts all combat with two characters but can only control one per turn, gets extra druid spells.  Upgrade (4xp) - once per turn the Druid can summon a dead hero back to full health. \n\nWizard: if dies gets reincarnated into a wolf. Upgrade (4xp) - when the wolf dies, you immediately come back to life. \n\nBarbarian: once per combat can roar his fear into enemies, hero can take 2 turns immediately after the first one resolves. Upgrade (4xp) - if an enemy misses all their attacks against you, roll your normal attack again against them. \n\nDungeon engineer: can bash enemies into another space. Upgrade (4xp) - traps do not affect you, instead you disarm the trap and can sell it for 10 gold.\n\nElf: lock doors once per quest or make roots appear from the floor and entangle an enemy even if they are not in combat. Upgrade (3xp) - learn to backstab. \n\n\n","editable":{"txt-vi":"The village of Millhaven sprawls around its central tavern. Heroes begin each rest scene in their quarters upstairs. They have 10 turns each to explore, interact, spend gold and train before the next quest begins at dawn.","txt-ti":"When a hero speaks to a drunk local, roll a d20 privately and consult this table. Click any result to log it. Each drunk can only be spoken to once per rest scene.","txt-ci":"A guard spotted a hero in a restricted area. They get 3 escape roll attempts. Each roll: 1 Combat Die — Shield = escape, Skull = guards gain ground. Three skulls = caught and jailed.","txt-ro":"The fighting is done. The last of the horde fades into the dark beyond Millhaven’s broken gate. You are exhausted, bloodied, and alive — which is more than most could say tonight. The village is quiet now, and your quarters at the Rusty Flagon are waiting. Somewhere below, a fire is still burning."}};
 </script>
 <!-- Load order: app first (defines S, all fns), then data, world, audio, dungeon, finally state (restores + calls init) -->
-<script src="js/app.js"></script>
-<script src="js/data.js"></script>
-<script src="js/world.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/dungeon.js"></script>
-<script src="js/state.js"></script>
+<script src="js/app.js?v=2"></script>
+<script src="js/data.js?v=2"></script>
+<script src="js/world.js?v=2"></script>
+<script src="js/audio.js?v=2"></script>
+<script src="js/dungeon.js?v=2"></script>
+<script src="js/state.js?v=2"></script>
+<script>
+function toggleTheme(){
+  var isLight=document.documentElement.getAttribute('data-theme')==='light';
+  var next=isLight?null:'light';
+  if(next)document.documentElement.setAttribute('data-theme',next);
+  else document.documentElement.removeAttribute('data-theme');
+  localStorage.setItem('hq_theme',next||'dark');
+  var btn=document.getElementById('themeToggleBtn');
+  if(btn)btn.textContent=next?'🌙':'☀';
+}
+// Sync button icon on load
+(function(){
+  var btn=document.getElementById('themeToggleBtn');
+  if(btn&&document.documentElement.getAttribute('data-theme')==='light')btn.textContent='🌙';
+}());
+</script>
 </body>
 </html>

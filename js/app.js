@@ -248,7 +248,7 @@ function renderMercs(){
   MERC_TYPES.forEach(function(m){
     var s=S.mercStats[m.id]||{atk:0,def:0,body:0,mind:0,notes:''};
     var card=document.createElement('div');
-    card.style.cssText='background:linear-gradient(160deg,var(--dark),#0e0904);border:1px solid var(--border);border-radius:2px;padding:1rem;cursor:pointer;transition:border-color .2s;position:relative;';
+    card.style.cssText='background:linear-gradient(160deg,var(--dark),var(--bg));border:1px solid var(--border);border-radius:2px;padding:1rem;cursor:pointer;transition:border-color .2s;position:relative;';
     card.onmouseover=function(){this.style.borderColor='var(--gold-dim)';};
     card.onmouseout=function(){this.style.borderColor='var(--border)';};
     (function(mid){ card.onclick=function(){openMercEdit(mid);}; })(m.id);
@@ -349,7 +349,7 @@ function renderEnemies(){
     var s=S.enemyStats[e.id]||{atk:0,def:0,body:0,mind:0,notes:''};
     var typeColor=e.type==='Undead'?'var(--purple-hi)':e.type==='Dragon'?'var(--blood-hi)':'var(--teal-hi)';
     var card=document.createElement('div');
-    card.style.cssText='background:linear-gradient(160deg,var(--dark),#0e0904);border:1px solid var(--border);border-radius:2px;padding:1rem;cursor:pointer;transition:border-color .2s;';
+    card.style.cssText='background:linear-gradient(160deg,var(--dark),var(--bg));border:1px solid var(--border);border-radius:2px;padding:1rem;cursor:pointer;transition:border-color .2s;';
     card.onmouseover=function(){this.style.borderColor='var(--border-hi)';};
     card.onmouseout=function(){this.style.borderColor='var(--border)';};
     (function(eid){ card.onclick=function(){openEnemyEdit(eid);}; })(e.id);
@@ -412,7 +412,7 @@ function loadAct(actId){
         '<div style="background:rgba(212,168,32,.04);border:1px solid rgba(212,168,32,.2);border-radius:2px;padding:.9rem 1rem">'+
         '<p style="font-style:italic;color:var(--parch);line-height:1.9;font-size:.9rem;white-space:pre-line">'+scene.text+'</p></div>';
     } else if(scene.type==='dm'){
-      block.innerHTML = '<div style="background:linear-gradient(135deg,#1a1208,#120d06);border:1px solid var(--border-hi);border-left:3px solid var(--gold);border-radius:0 2px 2px 0;padding:.85rem 1rem;">'+
+      block.innerHTML = '<div style="background:linear-gradient(135deg,var(--dark),var(--bg));border:1px solid var(--border-hi);border-left:3px solid var(--gold);border-radius:0 2px 2px 0;padding:.85rem 1rem;">'+
         '<div style="font-family:Cinzel,serif;font-size:.55rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.4rem;border-bottom:1px solid var(--border);padding-bottom:.3rem">⚔ Zargon\'s Eye — DM Only'+(scene.label?' · '+scene.label:'')+'</div>'+
         '<p style="font-style:italic;color:var(--parch-dim);line-height:1.75;font-size:.86rem;white-space:pre-line">'+scene.text+'</p></div>';
     } else if(scene.type==='combat'){
@@ -450,7 +450,7 @@ function renderSqList(){
     var status = S.sqStatus && S.sqStatus[sq.id] ? S.sqStatus[sq.id] : 'locked';
     var statusColor = status==='done'?'var(--green-hi)':status==='active'?'var(--gold-hi)':'var(--text-dim)';
     var statusLabel = status==='done'?'✅ COMPLETE':status==='active'?'⚔ ACTIVE':'🔒 NOT STARTED';
-    html += '<div style="background:linear-gradient(160deg,var(--dark),#0e0904);border:1px solid '+(status==='active'?'var(--gold)':status==='done'?'var(--green)':'var(--border)')+';border-radius:2px;padding:1rem;cursor:pointer;transition:all .2s" onclick="sqView(\'detail\',\''+sq.id+'\')"  onmouseover="this.style.borderColor=\'var(--gold-dim)\'" onmouseout="this.style.borderColor=\''+(status==='active'?'var(--gold)':status==='done'?'var(--green)':'var(--border)')+'\'">'+
+    html += '<div style="background:linear-gradient(160deg,var(--dark),var(--bg));border:1px solid '+(status==='active'?'var(--gold)':status==='done'?'var(--green)':'var(--border)')+';border-radius:2px;padding:1rem;cursor:pointer;transition:all .2s" onclick="sqView(\'detail\',\''+sq.id+'\')"  onmouseover="this.style.borderColor=\'var(--gold-dim)\'" onmouseout="this.style.borderColor=\''+(status==='active'?'var(--gold)':status==='done'?'var(--green)':'var(--border)')+'\'">'+
       '<div style="font-size:2rem;text-align:center;margin-bottom:.4rem">'+sq.portrait+'</div>'+
       '<div style="font-family:Cinzel,serif;font-size:.88rem;letter-spacing:.04em;color:var(--gold-hi);text-align:center;margin-bottom:.15rem">'+sq.title+'</div>'+
       '<div style="font-family:Cinzel,serif;font-size:.55rem;letter-spacing:.15em;color:var(--teal-hi);text-align:center;margin-bottom:.5rem">'+sq.hero.toUpperCase()+'</div>'+
@@ -516,7 +516,7 @@ function sqView(view, sqId){
   html += '</div><div>';
   // Stages
   sq.stages.forEach(function(stage, i){
-    html += '<div style="background:linear-gradient(135deg,var(--dark),#0e0904);border:1px solid var(--border);border-radius:2px;padding:.9rem;margin-bottom:.75rem">'+
+    html += '<div style="background:linear-gradient(135deg,var(--dark),var(--bg));border:1px solid var(--border);border-radius:2px;padding:.9rem;margin-bottom:.75rem">'+
       '<div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem">'+
       '<span style="font-family:Cinzel,serif;font-size:.58rem;color:var(--gold);background:rgba(184,134,11,.15);border:1px solid var(--gold-dim);padding:.1rem .4rem;border-radius:2px;letter-spacing:.1em">'+(i+1)+'</span>'+
       '<span style="font-family:Cinzel,serif;font-size:.75rem;color:var(--parch)">'+stage.title+'</span></div>';
@@ -606,7 +606,7 @@ function renderHome(){
         var statusTag = h.jailed
           ? '<span style="font-family:Cinzel,serif;font-size:.42rem;background:rgba(122,16,16,.3);border:1px solid var(--blood);color:var(--blood-hi);padding:.05rem .3rem;border-radius:2px;">JAILED</span>'
           : '';
-        return '<div style="background:linear-gradient(160deg,var(--dark),#0e0904);border:1px solid '+(h.jailed?'var(--blood)':'var(--gold)')+';border-radius:3px;padding:.7rem .85rem;min-width:130px;max-width:170px;flex:1 1 130px;">'
+        return '<div style="background:linear-gradient(160deg,var(--dark),var(--bg));border:1px solid '+(h.jailed?'var(--blood)':'var(--gold)')+';border-radius:3px;padding:.7rem .85rem;min-width:130px;max-width:170px;flex:1 1 130px;">'
           +'<div style="font-size:1.6rem;text-align:center;margin-bottom:.22rem;">'+h.portrait+'</div>'
           +'<div style="font-family:Cinzel,serif;font-size:.65rem;color:var(--gold-hi);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+h.name+'</div>'
           +'<div style="font-family:Cinzel,serif;font-size:.48rem;letter-spacing:.12em;color:var(--text-dim);text-align:center;margin-bottom:.28rem;">'+h.cls+(h.player&&h.player!=='—'?' · '+h.player:'')+'</div>'
