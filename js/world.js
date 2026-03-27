@@ -150,7 +150,7 @@ function buildWorldItemCard(item){
   if(s.move)    bonuses.push({lbl:(s.move>0?'+':'')+s.move+' Move',pos:s.move>0});
 
   var card=document.createElement('div');
-  card.style.cssText='background:linear-gradient(160deg,var(--dark),#0e0904);border:1px solid '+(obtained?'var(--gold)':'var(--border)')+';border-radius:2px;padding:1rem;transition:border-color .2s;';
+  card.style.cssText='background:linear-gradient(160deg,var(--dark),var(--bg));border:1px solid '+(obtained?'var(--gold)':'var(--border)')+';border-radius:2px;padding:1rem;transition:border-color .2s;';
   var bonusHtml='';
   if(bonuses.length){
     bonusHtml='<div style="display:flex;flex-wrap:wrap;gap:.22rem;margin-bottom:.45rem">';

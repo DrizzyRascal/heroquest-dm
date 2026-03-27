@@ -180,7 +180,16 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
 .sep{border:none;border-top:1px solid var(--border);margin:.8rem 0;}
 .dim{color:var(--parch-dim);font-style:italic;font-size:.87rem;line-height:1.65;}
 .intro{font-style:italic;color:var(--parch-dim);font-size:.9rem;line-height:1.75;margin-bottom:.9rem;border-left:2px solid var(--gold-dim);padding-left:.75rem;}
-@media(max-width:640px){.vmap{grid-template-columns:repeat(3,1fr);}.varea.span2{grid-column:span 1;}.main{padding:.7rem;}}
+/* ════ LAYOUT UTILITY CLASSES (replacing inline styles) ══════════════════════ */
+.hdr-right{display:flex;align-items:stretch;gap:.6rem;flex-wrap:wrap;}
+.home-top{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:start;margin-bottom:1.1rem;}
+.home-heroes{display:flex;flex-wrap:wrap;gap:.65rem;}
+
+/* ════ RESPONSIVE ════════════════════════════════════════════════════════════ */
+
+/* Prevent horizontal overflow globally */
+html{overflow-x:hidden;}
+
 @media(max-width:900px){
   .tab-burger{display:flex;}
   .tab-list{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:linear-gradient(180deg,var(--deep),#0a0806);border-bottom:1px solid var(--border);z-index:999;box-shadow:0 12px 30px rgba(0,0,0,.65);}
@@ -189,6 +198,86 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
   .tab-list .tab:hover{background:rgba(212,168,32,.05);color:var(--parch);}
   .tab-list .tab.active{border-left-color:var(--gold-hi);background:rgba(212,168,32,.07);color:var(--gold-hi);}
   .tab-list .tab::after{display:none;}
+}
+
+@media(max-width:640px){
+  /* Header — stack title on top, controls in a scrollable strip below */
+  .hdr{flex-direction:column;gap:.35rem;padding:.55rem .85rem;}
+  .hdr-title{font-size:1rem;}
+  .hdr-sub{display:none;}
+  /* Scrollable controls row — min-width:0 is critical to allow overflow:auto to work */
+  .hdr-right{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;width:100%;min-width:0;align-items:center;gap:.4rem;padding-bottom:.1rem;}
+  .hdr-right::-webkit-scrollbar{display:none;}
+  .hdr-actions{flex-wrap:nowrap;flex-shrink:0;gap:.3rem;}
+  .mode-btn{flex-shrink:0;font-size:.52rem;padding:.32rem .62rem;gap:.3rem;}
+  .vol-wrap{flex-shrink:0;}
+  .vol-slider{width:50px;}
+  .gold-pot{flex-shrink:0;padding:.35rem .7rem;}
+  .gold-pot-label{font-size:.44rem;}
+  .gold-pot-amount{font-size:.95rem;}
+  .hdr-actions .btn{padding:.32rem .62rem;font-size:.52rem;}
+  #hq-now-playing{display:none;}
+  /* Hide edit & download on mobile — secondary features */
+  #editBtn,.btn[onclick="dlHTML()"]{display:none;}
+
+  /* Tabs */
+  .tab-burger{font-size:.6rem;}
+
+  /* Main */
+  .main{padding:.55rem;}
+
+  /* Home screen */
+  .home-top{grid-template-columns:1fr;gap:.65rem;margin-bottom:.75rem;}
+  .home-heroes{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;}
+
+  /* Village map */
+  .vmap{grid-template-columns:repeat(3,1fr);}
+  .varea.span2{grid-column:span 1;}
+  .varea{padding:.55rem .35rem;min-height:70px;}
+  .varea-icon{font-size:1.2rem;}
+  .varea-name{font-size:.5rem;}
+  .varea-desc{font-size:.6rem;}
+
+  /* Grids — always 1 column below 640 */
+  .g2,.g3{grid-template-columns:1fr;}
+
+  /* Panels */
+  .panel{padding:.75rem;}
+  .ptitle{font-size:.6rem;}
+
+  /* Hero cards — more compact */
+  .hcard{padding:.7rem .65rem;}
+  .sgrid{grid-template-columns:repeat(4,1fr);gap:.22rem;}
+  .sbox{padding:.22rem;}
+  .slbl{font-size:.4rem;}
+  .sval{font-size:.8rem;}
+  .hname{font-size:.75rem;}
+  .hcls{font-size:.48rem;}
+  .pips{gap:2px;}
+  .pip{width:13px;height:13px;}
+
+  /* Turn tracker */
+  .trow{padding:.45rem .55rem;gap:.4rem;}
+  .tpip{width:15px;height:15px;}
+
+  /* Chase dice */
+  .cdice{gap:.4rem;}
+  .cdie{width:42px;height:42px;font-size:1.2rem;}
+
+  /* Buttons */
+  .btn{padding:.38rem .72rem;}
+  .btn-lg{padding:.48rem 1.1rem;font-size:.62rem;}
+  .brow{gap:.3rem;}
+
+  /* Modals */
+  .mbg{padding:.5rem;}
+  .mbox{padding:1.1rem 1rem;}
+  .sedit{grid-template-columns:1fr;}
+  .frow{flex-direction:column;align-items:flex-start;gap:.35rem;}
+  .flbl{min-width:unset;}
+
+  /* Notification toast */
+  .notif{bottom:.65rem;right:.65rem;font-size:.6rem;padding:.5rem .8rem;}
 }
 
 /* ── Quest Notes Panel ─────────────────────────────────────── */
@@ -306,3 +395,78 @@ body{background-image:radial-gradient(ellipse 75% 40% at 50% 0%,rgba(60,35,8,0.1
 /* Checklist / misc rows that use rgba backgrounds */
 .cwrap{border-radius:7px;}
 .cresult{border-radius:6px;}
+
+/* ════ LIGHT THEME ═══════════════════════════════════════════════════════════ */
+
+[data-theme="light"]{
+  --bg:#faf4e2;--deep:#f0e6cc;--dark:#e8dab8;
+  --border:#c8a458;--border-hi:#a88038;
+  --gold:#8a6000;--gold-hi:#6a4800;--gold-dim:#a07820;
+  --parch:#1e1206;--parch-dim:#4a3010;
+  --blood:#8a0a0a;--blood-hi:#b01818;
+  --teal:#0a5a50;--teal-hi:#0a7060;
+  --text:#1e1206;--text-dim:#6a4820;
+  --green:#1a5010;--green-hi:#268016;
+  --purple:#4a2a6a;--purple-hi:#7030b8;
+}
+
+/* Body */
+[data-theme="light"] body{background-image:radial-gradient(ellipse 75% 40% at 50% 0%,rgba(200,160,60,0.06),transparent);}
+
+/* Header */
+[data-theme="light"] .hdr{background:linear-gradient(180deg,#e8d888,#f0e6cc);box-shadow:0 2px 18px rgba(0,0,0,0.12),0 1px 0 rgba(180,130,10,0.18);}
+
+/* Panels — clean parchment, no dark end-stop */
+[data-theme="light"] .panel{background:#f0e8d0;box-shadow:0 2px 14px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.7);}
+[data-theme="light"] .panel:hover{box-shadow:0 5px 22px rgba(0,0,0,0.13),inset 0 1px 0 rgba(255,255,255,0.7);}
+
+/* Village areas */
+[data-theme="light"] .varea{background:#f0e8d0;}
+[data-theme="light"] .varea:hover{background:#ede4c8;}
+
+/* Hero cards */
+[data-theme="light"] .hcard{background:#f0e8d0;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+[data-theme="light"] .hcard:hover{box-shadow:0 5px 18px rgba(0,0,0,0.12);}
+[data-theme="light"] .hcard.on{box-shadow:0 0 18px rgba(160,120,10,0.22);}
+
+/* Stat boxes, turn rows, dice — white on parchment */
+[data-theme="light"] .sbox{background:rgba(255,255,255,0.65);border-color:var(--border);}
+[data-theme="light"] .trow{background:rgba(255,255,255,0.55);border-color:var(--border);}
+[data-theme="light"] .cdie{background:rgba(255,255,255,0.65);border-color:var(--border-hi);}
+[data-theme="light"] .sebox{background:rgba(255,255,255,0.6);border-color:var(--border-hi);}
+[data-theme="light"] .cwrap{background:rgba(180,40,40,0.05);border-color:var(--blood);}
+[data-theme="light"] .grow{background:rgba(180,130,10,0.08);border-color:rgba(180,130,10,0.25);}
+
+/* Inputs */
+[data-theme="light"] .inp{background:rgba(255,255,255,0.8);border-color:var(--border);}
+[data-theme="light"] .inp:focus{box-shadow:0 0 0 3px rgba(140,100,0,0.12);}
+[data-theme="light"] .gold-pot-inp{background:rgba(255,255,255,0.7);color:var(--text);}
+
+/* Modal */
+[data-theme="light"] .mbg{background:rgba(50,30,5,0.6);}
+[data-theme="light"] .mbox{background:#f0e8d0;border-color:var(--border-hi);box-shadow:0 20px 60px rgba(0,0,0,0.25),0 0 0 1px rgba(160,120,40,0.22);}
+
+/* Gold pot dropdown */
+[data-theme="light"] .gold-pot-panel{background:#f0e6c8;border-color:var(--gold);box-shadow:0 8px 28px rgba(0,0,0,0.2);}
+
+/* Notification toast */
+[data-theme="light"] .notif{background:#f0e8c0;border-color:var(--gold);color:var(--gold-hi);}
+
+/* Tab list (mobile dropdown) */
+[data-theme="light"] .tab-list{background:linear-gradient(180deg,var(--deep),#ecddb8);}
+[data-theme="light"] .tab-list .tab:hover{background:rgba(160,120,0,0.06);}
+[data-theme="light"] .tab-list .tab.active{border-left-color:var(--gold-hi);background:rgba(160,120,0,0.09);}
+
+/* DM Notes */
+[data-theme="light"] .dm-note-card{background:rgba(255,255,255,0.45);border-color:rgba(160,100,20,0.28);border-left-color:rgba(180,110,20,0.55);}
+[data-theme="light"] .dm-note-card:hover{background:rgba(255,255,255,0.65);border-color:rgba(200,140,30,0.4);}
+[data-theme="light"] .dm-note-ta{color:var(--text);}
+[data-theme="light"] .dm-note-ta:focus{color:#1e1206;}
+[data-theme="light"] .dm-note-badge{background:linear-gradient(135deg,#c88010,#a06008);border-color:rgba(140,80,0,0.5);color:#fff8e0;}
+
+/* Scrollbars */
+[data-theme="light"] *{scrollbar-color:rgba(160,120,40,0.45) transparent;}
+[data-theme="light"] *::-webkit-scrollbar-thumb{background:rgba(160,120,40,0.4);}
+
+/* Theme toggle button */
+#themeToggleBtn{font-size:.85rem;line-height:1;padding:.42rem .65rem;}
